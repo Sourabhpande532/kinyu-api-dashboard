@@ -6,7 +6,7 @@ const renderTableData = ( eachData ) => {
         <td>${ who }</td>
         <td>${ type }</td>
         <td>${ details }</td>
-        <td><a href="details${ id }">View</a></td>
+        <td><a href="details#${ id }">View</a></td>
     </tr>`
 }
 
