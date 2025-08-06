@@ -1,23 +1,9 @@
 import { apiGetLendings } from "../api/apiGetLendings.js";
 
 
-const renderData = ()=>{
-    // 
-}
-
-function LendingData( lending ) {
-    const renderTableData = lending.map( renderData );
-    const rowHtmlData = renderTableData.join( "" );
-    return `<table>
-        <thead>
-            <tr>
-                <th>Who</th>
-                <th>Type</th>
-                <th>Details</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-    </table>`
+const LendingData = ( lending ) => {
+    const lendingData = lending.map( renderTableData );
+    const appendRowsHtml = lendingData.join( "" );
 }
 
 function ErrorBanner( error ) {
@@ -25,10 +11,11 @@ function ErrorBanner( error ) {
         <h2>Error Occured ${ error }</h2>
         </hgroup>`
 }
+
 export default async function render() {
     const { error, data } = await apiGetLendings();
     if ( error ) {
-        document.getElementById( "app" ).innerHTML = ErrorBanner( error )
+        document.getElementById( "app" ).innerHTML = ErrorBanner();
         return;
     }
     document.getElementById( "app" ).innerHTML = LendingData( data )
