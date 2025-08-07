@@ -5,6 +5,7 @@ const router = new AtomRouter( { rootId: "app", debug: false } )
 
 router.add( [
     { url: "/index.html", handler: home },
+    { url: "/details", handler: details },
     { url: "/details", handler: details }
 ] )
 
