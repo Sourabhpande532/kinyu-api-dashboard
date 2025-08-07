@@ -8,29 +8,30 @@ const getHash = () => {
 const deleteSuccessfully = () => {
     return `<article>
     <h3>Details has been deleted Successfully</h3>
+    <a href="/index.html">Back to Home</a>
     </article>`
 }
 
-const removeLendings = () => {
+const removeLendings = async () => {
     const id = getHash();
-    const { error,data } = apiDeleteLending( id );
+    const { error } = await apiDeleteLending( id );
     if ( error ) {
-        document.getElementById( "app" ).innerHTML = ErrorBanner();
+        document.getElementById( "app" ).innerHTML = ErrorBanner( error );
         return;
     } else {
         document.getElementById( "app" ).innerHTML = deleteSuccessfully()
     }
 }
 
-const removeKinyuDetails = () => {
+const removeClickHandler = () => {
     const removeElement = document.getElementById( "remove-details" );
     removeElement.addEventListener( "click", removeLendings );
 }
 
 
-function LendingIndividualData( { id, who, type, when, details } ) {
+function LendingIndividualData( { who, type, when, details } ) {
     return `<article>
-        <header>${ who }</header>
+        <header><h2>${ who }</h2></header>
         <p>${ type }</p>
         <p>${ details }</p>
         <p>${ when }</p>
@@ -39,6 +40,7 @@ function LendingIndividualData( { id, who, type, when, details } ) {
         </footer>
     </article>`
 }
+
 function ErrorBanner( error ) {
     return `<article>
   <hgroup> 
@@ -57,5 +59,5 @@ export default async function render() {
     }
     const appendLendingData = LendingIndividualData( data )
     document.getElementById( "app" ).innerHTML = appendLendingData;
-    removeKinyuDetails();
+    removeClickHandler();
 }
