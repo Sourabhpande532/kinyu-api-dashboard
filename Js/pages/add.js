@@ -1,8 +1,10 @@
+import { apiAddLending } from "../api/apiAddLendings.js";
+
 const AddForms = () => {
   return `
     <h2>What did you lend recently</h2>
     <hr/>
-    <form>
+    <form id="formHandler">
     <input type="text" id="toWhom" placeholder="who"/>
     <select id="selectedCategory">
     <option value="" selected disabled>---Select---</option>
@@ -14,12 +16,35 @@ const AddForms = () => {
     <input type="datetime-local" id="loan_date"/>
     <input type="text" placeholder="Additional Details"
     id="details_loan"/>
-    <button type="submit">Add Lendings</button>
+    <button id="remove-elements" type="submit">Add Lendings</button>
     </form>
     <p id="result"></p>
     `;
 };
+const handleClickHandler = async()=>{
+    const whoInputElement = document.getElementById("toWhom");
+    const selectCategoryElement = document.getElementById("selectedCategory");
+    const dateTimeElement = document.getElementById("loan_date");
+    const detailsElement = document.getElementById("details_loan");
+    const resultElement = document.getElementById("result");
+
+    const payload = {
+      who: whoInputElement.value,
+      type: selectCategoryElement.value,
+      details: detailsElement.value,
+      when: dateTimeElement.value,
+    }
+    const {error} = await apiAddLending(payload)
+    if(!error){
+    resultElement.innerHTML = `Add data Successfully!`
+    resultElement.style.color = "green"
+    document.getElementById("formHandler").reset()
+    }
+
+}
 
 export default function add() {
   document.getElementById("app").innerHTML = AddForms();
+  const removeElement = document.getElementById("remove-elements");
+  removeElement.addEventListener("click",handleClickHandler);
 }
