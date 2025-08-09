@@ -16,12 +16,13 @@ const AddForms = () => {
     <input type="datetime-local" id="loan_date"/>
     <input type="text" placeholder="Additional Details"
     id="details_loan"/>
-    <button id="remove-elements" type="submit">Add Lendings</button>
+    <button type="submit">Add Lendings</button>
     </form>
     <p id="result"></p>
     `;
 };
-const handleClickHandler = async()=>{
+const handleClickHandler = async(event)=>{
+  event.preventDefault();
     const whoInputElement = document.getElementById("toWhom");
     const selectCategoryElement = document.getElementById("selectedCategory");
     const dateTimeElement = document.getElementById("loan_date");
@@ -39,12 +40,15 @@ const handleClickHandler = async()=>{
     resultElement.innerHTML = `Add data Successfully!`
     resultElement.style.color = "green"
     document.getElementById("formHandler").reset()
+    }else{
+      resultElement.innerText = "Error, lending data."
+      resultElement.style.color = "red"
     }
 
 }
 
 export default function add() {
   document.getElementById("app").innerHTML = AddForms();
-  const removeElement = document.getElementById("remove-elements");
-  removeElement.addEventListener("click",handleClickHandler);
+  const removeElement = document.getElementById("formHandler");
+  removeElement.addEventListener("submit",handleClickHandler);
 }
