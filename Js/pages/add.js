@@ -44,9 +44,7 @@ const handleClickHandler = async(event)=>{
       resultElement.innerText = "Error, lending data."
       resultElement.style.color = "red"
     }
-
 }
-
 export default function add() {
   document.getElementById("app").innerHTML = AddForms();
   const removeElement = document.getElementById("formHandler");
