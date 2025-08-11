@@ -30,11 +30,12 @@ const removeClickHandler = () => {
 
 
 function LendingIndividualData( { who, type, when, details } ) {
+    // const onlyTime = when.split("T")[0]
     return `<article>
         <header><h2>${ who }</h2></header>
         <p>${ type }</p>
         <p>${ details }</p>
-        <p>${ when }</p>
+        <p>${ when.split( "T" )[0] }</p>
         <footer>
             <button id="remove-details">Remove</button>
         </footer>

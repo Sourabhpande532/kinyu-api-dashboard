@@ -15,7 +15,6 @@ function setInitialTheme() {
     }
 }
 
-
 // Function to handle the toggle event 
 function themeSwitcher( event ) {
     if ( event.target.checked ) {
